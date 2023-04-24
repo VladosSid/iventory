@@ -1,15 +1,26 @@
 <script setup>
 import NavigationMenu from "./components/NavigationMenu/NavigationMenu.vue";
 import TopMenu from "./components/TopMenu/TopMenu.vue";
-
-components: {
-  NavigationMenu;
-}
 </script>
 
 <template>
-  <TopMenu />
-  <!-- <NavigationMenu /> -->
+  <TopMenu class="header" />
+
+  <main>
+    <NavigationMenu class="navigation-menu" />
+  </main>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.header {
+  position: fixed;
+}
+
+main {
+  margin-top: 80px;
+}
+
+.navigation-menu {
+  width: 170px;
+}
+</style>
