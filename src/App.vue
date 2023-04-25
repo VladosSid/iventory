@@ -6,9 +6,13 @@ import TopMenu from "./components/TopMenu/TopMenu.vue";
 <template>
   <TopMenu class="header" />
 
-  <main>
+  <div class="container-position">
     <NavigationMenu class="navigation-menu" />
-  </main>
+
+    <main>
+      <router-view class="container-position__page-view"></router-view>
+    </main>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -16,8 +20,16 @@ import TopMenu from "./components/TopMenu/TopMenu.vue";
   position: fixed;
 }
 
-main {
+.container-position {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
   margin-top: 80px;
+
+  &__page-view {
+    margin-left: 200px;
+  }
 }
 
 .navigation-menu {

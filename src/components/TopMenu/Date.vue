@@ -1,9 +1,9 @@
 <template>
-  <div class="date">
-    <p class="date__todey">{{ weekday }}</p>
+  <div v-if="time" class="date">
+    <p class="date__todey">{{ time.weekday }}</p>
 
     <div class="date__container">
-      <p class="date__date">{{ `${day} ${month}, ${year}` }}</p>
+      <p class="date__date">{{ `${time.day} ${time.month}, ${time.year}` }}</p>
 
       <svg
         style="margin-left: 15px; margin-right: 5px"
@@ -16,7 +16,9 @@
       >
         <IconClock />
       </svg>
-      <p class="date__time">{{ `${hours}:${minutes}` }}</p>
+      <p class="date__time">
+        {{ `${time.hours}:${time.minutes}` }}
+      </p>
     </div>
   </div>
 </template>
@@ -25,47 +27,14 @@
 import IconClock from "../icons/IconClock.vue";
 import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 
-let minutes = ref(0);
-let hours = ref(0);
-let day = ref("");
-let weekday = ref(0);
-let month = ref("");
-let year = ref("");
+import currentDate from "../../helpers/currentDate";
+const time = ref(null);
 
 let timerId = 0;
 
-const addZero = (value) => (value.length === 1 ? "0" + value : value);
-
-const getWeekDayName = (value) => {
-  switch (value) {
-    case 1:
-      return "Monday";
-    case 2:
-      return "Tuesday";
-    case 3:
-      return "Wednesday";
-    case 4:
-      return "Thursday";
-    case 5:
-      return "Friday";
-    case 6:
-      return "Saturday";
-    case 0:
-      return "Sunday";
-    default:
-      break;
-  }
-};
-
 onBeforeMount(() => {
   timerId = setInterval(() => {
-    minutes.value = addZero(`${new Date().getMinutes()}`);
-    hours.value = addZero(`${new Date().getHours()}`);
-    day.value = addZero(`${new Date().getDate()}`);
-    month.value = `${new Date()}`.slice(4, 7);
-    year.value = `${new Date().getFullYear()}`;
-    weekday.value = getWeekDayName(new Date().getDay());
-    minutes.value;
+    time.value = currentDate();
   }, 1000);
 });
 

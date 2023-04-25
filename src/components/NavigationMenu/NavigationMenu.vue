@@ -3,8 +3,13 @@
     <UserLogo />
 
     <ul class="nav-menu__list">
-      <li class="nav-menu__link current">приход</li>
-      <li class="nav-menu__link">группы</li>
+      <li class="nav-menu__item current">
+        <router-link class="nav-menu__link" to="/orders">приход</router-link>
+      </li>
+
+      <li class="nav-menu__item">
+        <router-link class="nav-menu__link" to="/products">группи</router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -35,13 +40,11 @@ import UserLogo from "./UserLogo.vue";
     flex-direction: column;
   }
 
-  &__link {
-    text-transform: uppercase;
-
+  &__item {
     &.current::after {
       content: "";
       height: 2px;
-      background: green;
+      background: #689e30;
       width: 100%;
       display: block;
     }
@@ -49,6 +52,11 @@ import UserLogo from "./UserLogo.vue";
     &:not(:last-child) {
       margin-bottom: 15px;
     }
+  }
+
+  &__link {
+    text-transform: uppercase;
+    color: #000;
   }
 }
 </style>
