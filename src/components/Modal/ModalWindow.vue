@@ -1,8 +1,8 @@
 <template>
-  <div v-if="show" class="modal-shadow" @click.self="toggle">
+  <div v-if="show" class="modal-shadow" @click.self="close">
     <div class="modal">
       <div class="modal-container">
-        <div class="modal-container__close" @click="toggle">&#10006;</div>
+        <div class="modal-container__close" @click="close">&#10006;</div>
 
         <h3 class="modal-container__title">
           <slot name="title"></slot>
@@ -10,10 +10,10 @@
         <slot name="body"> </slot>
       </div>
       <div class="modal-container__footer">
-        <button class="modal-container__footer__button-cancel" @click="toggle">
+        <button class="modal-container__footer__button-cancel" @click="close">
           Отмена
         </button>
-        <button class="modal-container__footer__button" @click="toggle">
+        <button class="modal-container__footer__button" @click="close">
           Удалить
         </button>
       </div>
@@ -22,10 +22,14 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  show: Boolean,
-  toggle: Function,
-});
+import { useGeneralStore } from "../../store/generalStore";
+
+const show = useGeneralStore().showModal;
+
+const close = () => {
+  useGeneralStore().showModal = false;
+  useGeneralStore().idModalOrdersId = null;
+};
 </script>
 
 <style scoped lang="scss">
@@ -73,7 +77,6 @@ const props = defineProps({
   }
 
   &__title {
-    color: #0971c7;
     margin-bottom: 15px;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="order-item-modal">
+  <!-- <div class="order-item-modal">
     <p class="order-item-modal__name">
       {{ title }}
     </p>
@@ -23,7 +23,7 @@
 
     <p class="order-item-modal__date">
       {{ date }}
-      <span style="font-size: 16px; color: #494d55">
+      <span style="font-size: 16px; color: #494d55; width: 120px">
         {{ day }} / {{ month }} / {{ year }}
       </span>
     </p>
@@ -35,79 +35,70 @@
         <span style="font-size: 12px"> UAH</span></span
       >
     </p>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
-const props = defineProps({
-  title: String,
-  date: String,
-  products: Array,
-  price: Object,
-  day: String,
-  month: String,
-  year: String,
-});
-
-console.log(props.price);
+import { useGeneralStore } from "../../store/generalStore";
+const prod = useGeneralStore().idModalProducts;
 </script>
 
 <style lang="scss" scoped>
-.order-item-modal {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
+// .order-item-modal {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   gap: 30px;
 
-  padding: 5px 15px;
-  border: 1px solid #c7c7c6;
-  border-radius: 5px;
+//   padding: 5px 15px;
+//   border: 1px solid #c7c7c6;
+//   border-radius: 5px;
 
-  &__name {
-    width: 500px;
+//   &__name {
+//     width: 500px;
 
-    text-decoration: underline;
-    font-size: 20px;
+//     text-decoration: underline;
+//     font-size: 20px;
 
-    color: #494d55;
-  }
+//     color: #494d55;
+//   }
 
-  &__quantity-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
+//   &__quantity-icon {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 30px;
+//     height: 30px;
 
-    border: 1px solid rgba(101, 101, 100, 0.5);
-    border-radius: 50%;
-  }
+//     border: 1px solid rgba(101, 101, 100, 0.5);
+//     border-radius: 50%;
+//   }
 
-  &__quantity {
-    font-size: 20px;
+//   &__quantity {
+//     font-size: 20px;
 
-    color: #494d55;
-  }
+//     color: #494d55;
+//   }
 
-  &__date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+//   &__date {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
 
-    color: #656564;
-    font-size: 12px;
-  }
+//     color: #656564;
+//     font-size: 12px;
+//   }
 
-  &__sum {
-    width: 100px;
-    color: #656564;
-    font-size: 12px;
-  }
+//   &__sum {
+//     width: 100px;
+//     color: #656564;
+//     font-size: 12px;
+//   }
 
-  &__info--positions {
-    display: flex;
-    flex-direction: column;
-  }
-}
+//   &__info--positions {
+//     display: flex;
+//     flex-direction: column;
+//   }
+// }
 </style>

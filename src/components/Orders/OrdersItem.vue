@@ -1,4 +1,5 @@
 <template>
+  <!-- <router-link to="/orders/:{{ id }}" class="order-section-item__title"> -->
   <li class="order-item">
     <p class="order-item__name">
       {{ title }}
@@ -17,7 +18,7 @@
           xmlns="http://www.w3.org/2000/svg"
           width="18"
           height="18"
-          fill="currentColor"
+          fill="#000"
           class="bi bi-list-ul"
           viewBox="0 0 16 16"
         >
@@ -30,7 +31,7 @@
 
       <div class="order-item__quantity order-item__info--positions">
         <p>
-          {{ products.length }}
+          {{ prodList.length }}
         </p>
 
         <span style="color: #656564; font-size: 12px">Продукта</span>
@@ -52,7 +53,15 @@
       >
     </p>
 
-    <button @click.prevent="toggleModal" class="order-item__delete">
+    <button
+      @click.prevent="
+        () => {
+          generalStore.showModal = true;
+          generalStore.idModalProducts = prodList;
+        }
+      "
+      class="order-item__delete"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -67,48 +76,35 @@
       </svg>
     </button>
   </li>
-
-  <ModalWindow :show="showModal" :toggle="toggleModal">
-    <template v-slot:title>Ви уверены, что хотите удалить приход?</template>
-    <template v-slot:body>
-      <ModalDeleteOrders
-        :title="props.title"
-        :date="date"
-        :products="props.products"
-        :price="priceCount"
-        :day="day"
-        :month="month"
-        :year="year"
-      />
-    </template>
-  </ModalWindow>
+  <!-- </router-link> -->
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useGeneralStore } from "../../store/generalStore";
 
-import ModalWindow from "../Modal/ModalWindow.vue";
-import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
 import currentDate from "../../helpers/currentDate";
 import refactorDate from "../../helpers/refactorDate";
 
+import { listProdacts } from "../../helpers/orderListProdacts";
+
 const { day, month, year } = currentDate();
 
+const generalStore = useGeneralStore();
+
 const props = defineProps({
+  id: Number,
   title: String,
   date: String,
-  products: Array,
 });
 
-const date = refactorDate(props.date);
-const showModal = ref(false);
+const prodList = listProdacts(props.id);
 
 const priceCount = {
   UAH: 0,
   USD: 0,
 };
 
-props.products.map(({ price }) => {
+prodList.map(({ price }) => {
   price.map((price) =>
     price.symbol === "UAH"
       ? (priceCount.UAH += price.value)
@@ -116,11 +112,7 @@ props.products.map(({ price }) => {
   );
 });
 
-const toggleModal = () => {
-  showModal.value = !showModal.value;
-};
-
-// console.log(props.products);
+const date = refactorDate(props.date);
 </script>
 
 <style lang="scss" scoped>
