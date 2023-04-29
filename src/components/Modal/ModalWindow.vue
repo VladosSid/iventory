@@ -43,6 +43,8 @@ const close = () => {
 }
 
 .modal {
+  width: 600px;
+
   background: #fff;
   border-radius: 5px;
   position: absolute;
@@ -51,8 +53,6 @@ const close = () => {
   transform: translate(-50%, -50%);
 }
 .modal-container {
-  padding-left: 15px;
-  padding-right: 15px;
   padding-top: 15px;
 
   &__close {
@@ -77,6 +77,9 @@ const close = () => {
   }
 
   &__title {
+    padding-left: 15px;
+    padding-right: 15px;
+
     margin-bottom: 15px;
   }
 

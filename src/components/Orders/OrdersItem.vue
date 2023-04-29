@@ -112,7 +112,7 @@ prodList.map(({ price }) => {
   );
 });
 
-const date = refactorDate(props.date);
+const date = refactorDate.refactorDateOrder(props.date);
 </script>
 
 <style lang="scss" scoped>
@@ -125,6 +125,8 @@ const date = refactorDate(props.date);
   padding: 5px 15px;
   border: 1px solid #c7c7c6;
   border-radius: 5px;
+
+  background: #fff;
 
   &:hover,
   &:focus {

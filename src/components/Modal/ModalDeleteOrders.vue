@@ -1,41 +1,32 @@
 <template>
-  <!-- <div class="order-item-modal">
-    <p class="order-item-modal__name">
-      {{ title }}
-    </p>
-
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-      "
+  <ul class="list-prod">
+    <li
+      v-for="{ id, serialNumber, isNew, photo, title } in prod"
+      :key="id"
+      class="list-prod__item"
     >
-      <div class="order-item-modal__quantity order-item-modal__info--positions">
-        <p>
-          {{ products.length }}
-        </p>
+      <div
+        :class="{
+          isAvailableSmbl: isNew === true,
+          isNotAvailableSmbl: isNew === false,
+        }"
+        class="list-prod__indicator"
+      ></div>
 
-        <span style="color: #656564; font-size: 12px">Продукта</span>
+      <img
+        src="../../assets/ImgProd.png"
+        alt="Photo product"
+        class="list-prod__photo"
+      />
+
+      <div class="list-prod__box-name">
+        {{ title }}
+        <span style="color: rgb(101, 101, 100); font-size: 12px">{{
+          serialNumber
+        }}</span>
       </div>
-    </div>
-
-    <p class="order-item-modal__date">
-      {{ date }}
-      <span style="font-size: 16px; color: #494d55; width: 120px">
-        {{ day }} / {{ month }} / {{ year }}
-      </span>
-    </p>
-
-    <p class="order-item-modal__sum order-item-modal__info--positions">
-      {{ price.USD }} &#36;
-      <span style="font-size: 16px; color: #494d55">
-        {{ price.UAH }}
-        <span style="font-size: 12px"> UAH</span></span
-      >
-    </p>
-  </div> -->
+    </li>
+  </ul>
 </template>
 
 <script setup>
@@ -44,61 +35,53 @@ const prod = useGeneralStore().idModalProducts;
 </script>
 
 <style lang="scss" scoped>
-// .order-item-modal {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-between;
-//   gap: 30px;
+.list-prod {
+  .isAvailableSmbl {
+    background-color: #cddc39;
+  }
+  .isNotAvailableSmbl {
+    background-color: grey;
+  }
+  &__item {
+    border-top: 1px solid rgba(101, 101, 100, 0.3);
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 2fr 8fr;
 
-//   padding: 5px 15px;
-//   border: 1px solid #c7c7c6;
-//   border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 
-//   &__name {
-//     width: 500px;
+    &:hover,
+    &:focus {
+      box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
+      scale: 101%;
+    }
 
-//     text-decoration: underline;
-//     font-size: 20px;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-//     color: #494d55;
-//   }
+  &__indicator {
+    width: 8px;
+    height: 8px;
+    background: #000;
 
-//   &__quantity-icon {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     width: 30px;
-//     height: 30px;
+    border-radius: 50%;
+  }
 
-//     border: 1px solid rgba(101, 101, 100, 0.5);
-//     border-radius: 50%;
-//   }
+  &__photo {
+    width: 50px;
+    height: 50px;
+  }
 
-//   &__quantity {
-//     font-size: 20px;
+  &__box-name {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 
-//     color: #494d55;
-//   }
-
-//   &__date {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-
-//     color: #656564;
-//     font-size: 12px;
-//   }
-
-//   &__sum {
-//     width: 100px;
-//     color: #656564;
-//     font-size: 12px;
-//   }
-
-//   &__info--positions {
-//     display: flex;
-//     flex-direction: column;
-//   }
-// }
+    font-size: 16px;
+    color: #494d55;
+  }
+}
 </style>

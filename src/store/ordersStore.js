@@ -4,23 +4,23 @@ export const useOrdersStore = defineStore("orders", {
   state: () => ({
     orders: [
       {
-        id: 1,
+        id: "1",
         title: "Длинное при длинное название",
         date: "2017-06-29 12:09:33",
         description: "desc",
         productsId: ["11", "12"],
       },
       {
-        id: 2,
+        id: "2",
         title: "Самое длинное название, длинее всех длинных ",
-        date: "2017-06-29 12:09:33",
+        date: "2015-06-29 12:09:33",
         description: "desc",
         productsId: ["21", "22"],
       },
       {
-        id: 3,
-        title: "Длинюююююююююююююююююющее название ",
-        date: "2017-06-29 12:09:33",
+        id: "3",
+        title: "Длинюю ююю юююююю юююю ююющее название ",
+        date: "2018-01-20 14:09:33",
         description: "desc",
         productsId: ["31"],
       },

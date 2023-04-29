@@ -1,5 +1,5 @@
 import { useOrdersStore } from "../store/ordersStore";
-import { useProductsStore } from "../store/prodactsStore";
+import { useProductsStore } from "../store/productsStore";
 
 export function listProdacts(orderId, price) {
   const listId = useOrdersStore().orders.find(
