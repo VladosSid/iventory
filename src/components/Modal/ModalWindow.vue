@@ -34,11 +34,11 @@ const close = () => {
 
 <style scoped lang="scss">
 .modal-shadow {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  min-height: 100%;
-  width: 100%;
+  min-height: 100vh;
+  width: 100vw;
   background: rgba(0, 0, 0, 0.39);
 }
 

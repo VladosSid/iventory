@@ -14,17 +14,23 @@
     <b>Приходы / {{ data.orders.length }}</b>
   </div>
 
-  <ul style="display: flex; flex-direction: column; gap: 10px">
-    <OrdersItem
-      v-for="{ id, title, date, productsId } in data.orders"
-      :key="id"
-      :id="id"
-      :title="title"
-      :date="date"
-    />
-  </ul>
+  <div
+    :class="{
+      gridContainer: useOrdersStore().isOpen === true,
+    }"
+  >
+    <ul style="display: flex; flex-direction: column; gap: 10px">
+      <OrdersItem
+        v-for="{ id, title, date, productsId } in data.orders"
+        :key="id"
+        :id="id"
+        :title="title"
+        :date="date"
+      />
+    </ul>
 
-  <OrderListProdact />
+    <OrderListProdact v-if="useOrdersStore().isOpen" />
+  </div>
 
   <ModalWindow v-if="generalStore.showModal">
     <template v-slot:title>Ви уверены, что хотите удалить приход?</template>
@@ -41,17 +47,20 @@ import { useOrdersStore } from "../../store/ordersStore";
 import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
 import ModalWindow from "../Modal/ModalWindow.vue";
 
-// import data from "../../front-end-data.json";
 import OrdersItem from "./OrdersItem.vue";
 import IconAdd from "../icons/IconAdd.vue";
 import OrderListProdact from "./OrderListProdact.vue";
 
 const generalStore = useGeneralStore();
 const data = useOrdersStore();
-const idOrderModal = useGeneralStore().idModalOrders;
 </script>
 
 <style lang="scss" scoped>
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 15px;
+}
 .add-orders {
   display: flex;
   flex-direction: row;

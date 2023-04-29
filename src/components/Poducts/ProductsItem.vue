@@ -16,7 +16,7 @@
 
     <div class="list-prod__box-name">
       {{ title }}
-      <span style="color: rgb(101, 101, 100); font-size: 12px">{{
+      <span style="color: rgb(101, 101, 100); font-size: 10px">{{
         serialNumber
       }}</span>
     </div>
@@ -26,7 +26,7 @@
         isAvailableSmbl: isNew === true,
         isNotAvailableSmbl: isNew === false,
       }"
-      class="list-prod__status"
+      style="font-size: 14px"
     >
       {{ isNew === true ? "Свободен" : "В ремонте" }}
     </p>
@@ -35,7 +35,7 @@
       <span
         style="
           color: #656564;
-          font-size: 12px;
+          font-size: 10px;
           display: inherit;
           gap: 10px;
           align-items: center;
@@ -61,11 +61,11 @@
       {{ isNew === true ? "новый" : "Б / У" }}
     </p>
 
-    <p class="list-prod__sum list-prod__info--positions">
+    <p class="list-prod__sum" style="display: flex; flex-direction: column">
       {{ price[0].value }} &#36;
-      <span style="font-size: 16px; color: #494d55">
+      <span style="font-size: 14px; color: #494d55">
         {{ price[1].value }}
-        <span style="font-size: 12px"> UAH</span></span
+        <span style="font-size: 10px"> UAH</span></span
       >
     </p>
 
@@ -73,13 +73,39 @@
       {{ titelOrder.title }}
     </p>
 
-    <p style="font-size: 14px; color: #494d55">
+    <p style="font-size: 12px; color: #494d55">
       {{ dateOrder }}
     </p>
+
+    <button
+      @click.prevent="
+        () => {
+          useGeneralStore().showModal = true;
+          useGeneralStore().idModalProducts = [
+            { id, serialNumber, isNew, photo, title },
+          ];
+        }
+      "
+      class="list-prod__delete"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-trash3-fill list-prod__delete-icon"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+        />
+      </svg>
+    </button>
   </li>
 </template>
 
 <script setup>
+import { useGeneralStore } from "../../store/generalStore";
 import { useOrdersStore } from "../../store/ordersStore";
 import refactorDate from "../../helpers/refactorDate";
 
@@ -106,24 +132,10 @@ const dateOrder = refactorDate.refactorDateProd(props.date);
 </script>
 
 <style lang="scss" scoped>
-.isAvailableSmblBg {
-  background-color: #cddc39;
-}
-.isNotAvailableSmblBg {
-  background-color: grey;
-}
-
-.isAvailableSmbl {
-  color: #cddc39;
-}
-.isNotAvailableSmbl {
-  color: grey;
-}
-
 .list-prod {
   display: grid;
   align-items: center;
-  grid-template-columns: 2% 0.1fr 0.6fr 0.2fr 0.2fr 0.1fr 0.1fr 0.3fr 0.2fr;
+  grid-template-columns: 2% 0.1fr 0.6fr 0.2fr 0.2fr 0.1fr 0.1fr 0.3fr 0.2fr 0.1fr;
 
   border: 1px solid rgba(101, 101, 100, 0.3);
   border-radius: 5px;
@@ -159,8 +171,7 @@ const dateOrder = refactorDate.refactorDateProd(props.date);
     display: grid;
     grid-template-rows: 1fr 1fr;
 
-    font-size: 16px;
-    color: #494d55;
+    font-size: 14px;
   }
 
   &__guarantee {
@@ -169,31 +180,44 @@ const dateOrder = refactorDate.refactorDateProd(props.date);
     justify-content: center;
 
     &-date {
-      font-size: 14px;
+      font-size: 12px;
       color: #494d55;
     }
   }
 
   &__isnew {
-    font-size: 16px;
+    font-size: 14px;
     color: #494d55;
   }
 
   &__sum {
     width: 100px;
     color: #656564;
-    font-size: 12px;
-  }
-
-  &__info--positions {
-    display: flex;
-    flex-direction: column;
+    font-size: 10px;
   }
 
   &__name-order {
-    font-size: 16px;
+    font-size: 14px;
 
     color: #494d55;
+  }
+
+  &__delete {
+    background: none;
+    border: none;
+  }
+
+  &__delete-icon {
+    fill: #656564;
+
+    &:hover,
+    &:focus {
+      fill: #494d55;
+      scale: 130%;
+    }
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 </style>

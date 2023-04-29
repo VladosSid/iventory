@@ -41,14 +41,6 @@ import UserLogo from "./UserLogo.vue";
   }
 
   &__item {
-    &.current::after {
-      content: "";
-      height: 2px;
-      background: #689e30;
-      width: 100%;
-      display: block;
-    }
-
     &:not(:last-child) {
       margin-bottom: 15px;
     }
@@ -57,6 +49,14 @@ import UserLogo from "./UserLogo.vue";
   &__link {
     text-transform: uppercase;
     color: #000;
+
+    &.router-link-exact-active::after {
+      content: "";
+      height: 2px;
+      background: #689e30;
+      width: 100%;
+      display: block;
+    }
   }
 }
 </style>

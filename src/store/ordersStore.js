@@ -25,5 +25,8 @@ export const useOrdersStore = defineStore("orders", {
         productsId: ["31"],
       },
     ],
+
+    isOpen: false,
+    idOpenOrder: null,
   }),
 });

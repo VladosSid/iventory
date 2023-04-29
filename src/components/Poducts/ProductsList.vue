@@ -41,6 +41,13 @@
       :date="date"
     />
   </ul>
+
+  <ModalWindow v-if="useGeneralStore().showModal">
+    <template v-slot:title>Ви уверены, что хотите удалить продукт?</template>
+    <template v-slot:body>
+      <ModalDeleteOrders />
+    </template>
+  </ModalWindow>
 </template>
 
 <script setup>
@@ -48,6 +55,9 @@ import { useGeneralStore } from "../../store/generalStore";
 import { useProductsStore } from "../../store/productsStore";
 import ProductsItem from "./ProductsItem.vue";
 import IconAdd from "../icons/IconAdd.vue";
+
+import ModalWindow from "../Modal/ModalWindow.vue";
+import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
 
 const data = useProductsStore();
 </script>

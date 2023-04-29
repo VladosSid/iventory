@@ -1,7 +1,20 @@
 <template>
   <!-- <router-link to="/orders/:{{ id }}" class="order-section-item__title"> -->
-  <li class="order-item">
-    <p class="order-item__name">
+  <li
+    class="order-item"
+    :class="{
+      orderIsOpen: useOrdersStore().isOpen === true,
+      orderClose: useOrdersStore().isOpen === false,
+    }"
+  >
+    <p
+      v-if="!useOrdersStore().isOpen"
+      class="order-item__name"
+      @click="
+        useOrdersStore().isOpen = true;
+        useOrdersStore().idOpenOrder = id;
+      "
+    >
       {{ title }}
     </p>
 
@@ -13,7 +26,13 @@
         gap: 15px;
       "
     >
-      <span class="order-item__quantity-icon">
+      <span
+        class="order-item__quantity-icon"
+        @click="
+          useOrdersStore().isOpen = true;
+          useOrdersStore().idOpenOrder = id;
+        "
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -45,7 +64,10 @@
       </span>
     </p>
 
-    <p class="order-item__sum order-item__info--positions">
+    <p
+      v-if="!useOrdersStore().isOpen"
+      class="order-item__sum order-item__info--positions"
+    >
       {{ priceCount.USD }} &#36;
       <span style="font-size: 16px; color: #494d55">
         {{ priceCount.UAH }}
@@ -54,6 +76,7 @@
     </p>
 
     <button
+      v-if="!useOrdersStore().isOpen"
       @click.prevent="
         () => {
           generalStore.showModal = true;
@@ -81,6 +104,7 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
+import { useOrdersStore } from "../../store/ordersStore";
 
 import currentDate from "../../helpers/currentDate";
 import refactorDate from "../../helpers/refactorDate";
@@ -92,7 +116,7 @@ const { day, month, year } = currentDate();
 const generalStore = useGeneralStore();
 
 const props = defineProps({
-  id: Number,
+  id: String,
   title: String,
   date: String,
 });
@@ -116,11 +140,16 @@ const date = refactorDate.refactorDateOrder(props.date);
 </script>
 
 <style lang="scss" scoped>
+.orderIsOpen {
+  grid-template-columns: 1fr 1fr;
+}
+.orderClose {
+  grid-template-columns: 6fr 1fr 2fr 1fr 0.5fr;
+}
 .order-item {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+
   align-items: center;
-  justify-content: space-between;
 
   padding: 5px 15px;
   border: 1px solid #c7c7c6;
