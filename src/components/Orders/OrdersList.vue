@@ -1,11 +1,15 @@
 <template>
   <div class="add-orders">
     <svg
+      @click="
+        useGeneralStore().showModal = true;
+        useGeneralStore().addModalOrder = true;
+      "
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"
       fill="#689e30"
-      class="bi bi-plus-circle-fill"
+      class="bi bi-plus-circle-fill add-orders__button"
       viewBox="0 0 16 16"
     >
       <IconAdd />
@@ -33,9 +37,24 @@
   </div>
 
   <ModalWindow v-if="generalStore.showModal">
-    <template v-slot:title>Ви уверены, что хотите удалить приход?</template>
     <template v-slot:body>
-      <ModalDeleteOrders />
+      <ModalDeleteOrders
+        v-if="
+          !useGeneralStore().addModalOrder && !useGeneralStore().addModalProd
+        "
+      >
+        <template v-slot:title>
+          Ви уверены, что хотите удалить приход?
+        </template>
+      </ModalDeleteOrders>
+
+      <ModalAddOrder v-if="useGeneralStore().addModalOrder">
+        <template v-slot:title> Добавить приход </template>
+      </ModalAddOrder>
+
+      <AddProductModal v-if="useGeneralStore().addModalProd">
+        <template v-slot:title> Добавить продукт </template>
+      </AddProductModal>
     </template>
   </ModalWindow>
 </template>
@@ -44,8 +63,10 @@
 import { useGeneralStore } from "../../store/generalStore";
 import { useOrdersStore } from "../../store/ordersStore";
 
-import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
 import ModalWindow from "../Modal/ModalWindow.vue";
+import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
+import ModalAddOrder from "../Modal/AddOrder.vue";
+import AddProductModal from "../Modal/AddProductModal.vue";
 
 import OrdersItem from "./OrdersItem.vue";
 import IconAdd from "../icons/IconAdd.vue";
@@ -69,5 +90,10 @@ const data = useOrdersStore();
   margin-bottom: 30px;
 
   gap: 15px;
+
+  &__button:hover,
+  &__button:focus {
+    scale: 1.1;
+  }
 }
 </style>

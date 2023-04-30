@@ -104,5 +104,13 @@ export const useProductsStore = defineStore("prodacts", {
         date: "2018-01-20 14:09:33",
       },
     ],
+
+    newProduct: {
+      serialNumber: "",
+      title: "",
+      type: "",
+      orderId: "",
+      isNew: false,
+    },
   }),
 });

@@ -4,17 +4,15 @@
       <div class="modal-container">
         <div class="modal-container__close" @click="close">&#10006;</div>
 
-        <h3 class="modal-container__title">
-          <slot name="title"></slot>
-        </h3>
         <slot name="body"> </slot>
       </div>
+
       <div class="modal-container__footer">
         <button class="modal-container__footer__button-cancel" @click="close">
           Отмена
         </button>
-        <button class="modal-container__footer__button" @click="close">
-          Удалить
+        <button class="modal-container__footer__button" @click="submit">
+          {{ useGeneralStore().addModalOrder ? "Добавить" : "Удлить" }}
         </button>
       </div>
     </div>
@@ -23,17 +21,37 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
+import { useOrdersStore } from "../../store/ordersStore";
+import { useProductsStore } from "../../store/productsStore";
 
 const show = useGeneralStore().showModal;
 
 const close = () => {
   useGeneralStore().showModal = false;
-  useGeneralStore().idModalOrdersId = null;
+  useGeneralStore().idModalProducts = null;
+  useGeneralStore().addModalOrder = false;
+  useGeneralStore().addModalProd = false;
+  useOrdersStore().newOrderTitle = "";
+};
+
+const submit = () => {
+  if (useGeneralStore().addModalOrder) {
+    // SHEMA
+    return console.log(useOrdersStore().newOrderTitle);
+  }
+
+  if (useGeneralStore().addModalProd) {
+    // SHEMA
+    return console.log("add PRODUCT");
+  }
+
+  console.log("order delete");
 };
 </script>
 
 <style scoped lang="scss">
 .modal-shadow {
+  z-index: 200;
   position: fixed;
   top: 0;
   left: 0;
@@ -74,13 +92,6 @@ const close = () => {
     box-shadow: -10px 15px 42px -22px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: -10px 15px 42px -22px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -10px 15px 42px -22px rgba(0, 0, 0, 0.75);
-  }
-
-  &__title {
-    padding-left: 15px;
-    padding-right: 15px;
-
-    margin-bottom: 15px;
   }
 
   &__footer {

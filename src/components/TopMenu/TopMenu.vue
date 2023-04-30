@@ -21,6 +21,8 @@ import InputSearch from "../shared/InputSearch.vue";
 
 <style lang="scss" scoped>
 .top-menu {
+  z-index: 199;
+
   width: 100vw;
   height: 80px;
   background: #fff;

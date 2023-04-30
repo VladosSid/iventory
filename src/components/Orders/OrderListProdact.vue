@@ -3,7 +3,14 @@
     <div class="order-prod__box-title">
       <h2 class="order-prod__title">{{ carentOrder.title }}</h2>
 
-      <div class="order-prod__add-prod">
+      <div
+        class="order-prod__add-prod"
+        @click="
+          useGeneralStore().showModal = true;
+          useGeneralStore().addModalProd = true;
+          useProductsStore().newProduct.orderId = useOrdersStore().idOpenOrder;
+        "
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -83,7 +90,13 @@
       </li>
     </ul>
 
-    <div class="order-prod__close">
+    <div
+      class="order-prod__close"
+      @click="
+        useOrdersStore().isOpen = false;
+        useOrdersStore().idOpenOrder = null;
+      "
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -102,6 +115,7 @@
 
 <script setup>
 import { useOrdersStore } from "../../store/ordersStore";
+import { useProductsStore } from "../../store/productsStore";
 import { useGeneralStore } from "../../store/generalStore";
 import { listProdacts } from "../../helpers/orderListProdacts";
 
@@ -137,9 +151,9 @@ const data = listProdacts(useOrdersStore().idOpenOrder);
 
     gap: 15px;
 
-    &:hover,
-    &:focus {
-      scale: 102%;
+    &:hover > svg,
+    &:focus > svg {
+      scale: 1.3;
     }
 
     transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1);

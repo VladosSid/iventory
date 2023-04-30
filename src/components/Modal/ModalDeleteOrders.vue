@@ -1,4 +1,8 @@
 <template>
+  <h3 class="delete-order__title">
+    <slot name="title"></slot>
+  </h3>
+
   <ul class="list-prod">
     <li
       v-for="{ id, serialNumber, isNew, photo, title } in prod"
@@ -42,6 +46,14 @@ const prod = useGeneralStore().idModalProducts;
   .isNotAvailableSmbl {
     background-color: grey;
   }
+
+  .delete-order__title {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    margin-bottom: 15px;
+  }
+
   &__item {
     border-top: 1px solid rgba(101, 101, 100, 0.3);
     display: grid;

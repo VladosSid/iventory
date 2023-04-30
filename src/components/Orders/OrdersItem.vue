@@ -1,5 +1,4 @@
 <template>
-  <!-- <router-link to="/orders/:{{ id }}" class="order-section-item__title"> -->
   <li
     class="order-item"
     :class="{
@@ -98,8 +97,12 @@
         />
       </svg>
     </button>
+
+    <div
+      v-if="useOrdersStore().idOpenOrder === id"
+      class="order-item__current"
+    ></div>
   </li>
-  <!-- </router-link> -->
 </template>
 
 <script setup>
@@ -141,12 +144,13 @@ const date = refactorDate.refactorDateOrder(props.date);
 
 <style lang="scss" scoped>
 .orderIsOpen {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 0.5fr;
 }
 .orderClose {
   grid-template-columns: 6fr 1fr 2fr 1fr 0.5fr;
 }
 .order-item {
+  position: relative;
   display: grid;
 
   align-items: center;
@@ -232,6 +236,18 @@ const date = refactorDate.refactorDateOrder(props.date);
 
     transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
       scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__current {
+    position: absolute;
+    top: 0;
+    right: -12px;
+    width: 50px;
+    height: 100%;
+
+    background: #c7c7c6;
+
+    clip-path: polygon(0 0, 34% 0, 76% 0, 100% 50%, 76% 100%, 36% 100%, 0 100%);
   }
 
   &__info--positions {

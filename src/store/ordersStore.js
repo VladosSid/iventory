@@ -28,5 +28,6 @@ export const useOrdersStore = defineStore("orders", {
 
     isOpen: false,
     idOpenOrder: null,
+    newOrderTitle: "",
   }),
 });

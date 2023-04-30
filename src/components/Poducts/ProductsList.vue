@@ -1,16 +1,5 @@
 <template>
   <div class="add-orders">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      fill="#689e30"
-      class="bi bi-plus-circle-fill"
-      viewBox="0 0 16 16"
-    >
-      <IconAdd />
-    </svg>
-
     <b>Продукты / {{ data.products.length }}</b>
   </div>
 
@@ -43,9 +32,12 @@
   </ul>
 
   <ModalWindow v-if="useGeneralStore().showModal">
-    <template v-slot:title>Ви уверены, что хотите удалить продукт?</template>
     <template v-slot:body>
-      <ModalDeleteOrders />
+      <ModalDeleteOrders>
+        <template v-slot:title
+          >Ви уверены, что хотите удалить продукт?</template
+        >
+      </ModalDeleteOrders>
     </template>
   </ModalWindow>
 </template>
@@ -54,7 +46,6 @@
 import { useGeneralStore } from "../../store/generalStore";
 import { useProductsStore } from "../../store/productsStore";
 import ProductsItem from "./ProductsItem.vue";
-import IconAdd from "../icons/IconAdd.vue";
 
 import ModalWindow from "../Modal/ModalWindow.vue";
 import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
