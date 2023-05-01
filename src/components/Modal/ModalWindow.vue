@@ -22,7 +22,8 @@
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
 import { useOrdersStore } from "../../store/ordersStore";
-import { useProductsStore } from "../../store/productsStore";
+
+import addNewOrder from "../../helpers/request/addNewOrder";
 
 const show = useGeneralStore().showModal;
 
@@ -36,8 +37,7 @@ const close = () => {
 
 const submit = () => {
   if (useGeneralStore().addModalOrder) {
-    // SHEMA
-    return console.log(useOrdersStore().newOrderTitle);
+    return addNewOrder();
   }
 
   if (useGeneralStore().addModalProd) {
