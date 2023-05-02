@@ -82,7 +82,7 @@
         () => {
           generalStore.showModal = true;
           generalStore.idModalProducts = prodList;
-          useOrdersStore().idOpenOrder = id;
+          generalStore.idDeleteOrder = id;
         }
       "
       class="order-item__delete"

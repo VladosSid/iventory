@@ -15,9 +15,6 @@ import { useGeneralStore } from "../../store/generalStore";
 import { useOrdersStore } from "../../store/ordersStore";
 import { useProductsStore } from "../../store/productsStore";
 
-import addNewOrder from "../../helpers/request/addNewOrder";
-import newProd from "../../helpers/request/addNewProduct";
-
 const show = useGeneralStore().showModal;
 
 const close = () => {

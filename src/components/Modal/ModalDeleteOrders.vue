@@ -44,23 +44,25 @@
 </template>
 
 <script setup>
-import { onUnmounted } from "vue";
 import { useGeneralStore } from "../../store/generalStore";
 import { useOrdersStore } from "../../store/ordersStore";
 
 const close = () => {
   useGeneralStore().showModal = false;
   useGeneralStore().idModalProducts = null;
+  useGeneralStore().idDeleteOrder = null;
 };
 
 const submit = () => {
-  useOrdersStore().getDeleteOrder(useOrdersStore().idOpenOrder);
+  if (useGeneralStore().idDeleteOrder) {
+    useOrdersStore().getDeleteOrder(useGeneralStore().idDeleteOrder);
+    close();
+
+    return;
+  }
+  console.log("prod delete");
   close();
 };
-
-onUnmounted(() => {
-  useOrdersStore().idOpenOrder = null;
-});
 </script>
 
 <style lang="scss" scoped>

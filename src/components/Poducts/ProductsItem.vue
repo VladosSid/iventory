@@ -70,7 +70,7 @@
     </p>
 
     <p class="list-prod__name-order">
-      {{ titelOrder.title }}
+      {{ !titelOrder ? "---" : titelOrder.title }}
     </p>
 
     <p style="font-size: 12px; color: #494d55">
