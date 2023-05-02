@@ -8,7 +8,8 @@
         @click="
           useGeneralStore().showModal = true;
           useGeneralStore().addModalProd = true;
-          useGeneralStore().newProduct.orderId = useGeneralStore().orders.idOpenOrder;
+          useGeneralStore().newProduct.orderId =
+            useGeneralStore().orders.idOpenOrder;
         "
       >
         <svg
@@ -29,8 +30,9 @@
     <ul class="order-prod__list">
       <li
         class="order-prod__item"
-        v-for="{ id, title, serialNumber, isNew, photo } in useGeneralStore()
-          .currentOrderProd"
+        v-for="{ id, title, serialNumber, isNew, photo } in listProdacts(
+          useGeneralStore().idOpenOrder
+        )"
         :key="id"
       >
         <div
@@ -119,6 +121,8 @@
 // import { useOrdersStore } from "../../store/ordersStore";
 // import { useProductsStore } from "../../store/productsStore";
 import { useGeneralStore } from "../../store/generalStore";
+
+import { listProdacts } from "../../helpers/orderListProdacts";
 
 // const order = useOrdersStore();
 
