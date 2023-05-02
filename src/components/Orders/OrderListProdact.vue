@@ -8,7 +8,7 @@
         @click="
           useGeneralStore().showModal = true;
           useGeneralStore().addModalProd = true;
-          useProductsStore().newProduct.orderId = useOrdersStore().idOpenOrder;
+          useGeneralStore().newProduct.orderId = useGeneralStore().orders.idOpenOrder;
         "
       >
         <svg
@@ -29,7 +29,7 @@
     <ul class="order-prod__list">
       <li
         class="order-prod__item"
-        v-for="{ id, title, serialNumber, isNew, photo } in useOrdersStore()
+        v-for="{ id, title, serialNumber, isNew, photo } in useGeneralStore()
           .currentOrderProd"
         :key="id"
       >
@@ -94,9 +94,9 @@
     <div
       class="order-prod__close"
       @click="
-        useOrdersStore().isOpen = false;
-        useOrdersStore().idOpenOrder = null;
-        useOrdersStore().currentOrderOpenId = null;
+        useGeneralStore().isOpen = false;
+        useGeneralStore().idOpenOrder = null;
+        useGeneralStore().currentOrderOpenId = null;
       "
     >
       <svg
@@ -116,14 +116,16 @@
 </template>
 
 <script setup>
-import { useOrdersStore } from "../../store/ordersStore";
-import { useProductsStore } from "../../store/productsStore";
+// import { useOrdersStore } from "../../store/ordersStore";
+// import { useProductsStore } from "../../store/productsStore";
 import { useGeneralStore } from "../../store/generalStore";
+
+// const order = useOrdersStore();
 
 import IconAdd from "../icons/IconAdd.vue";
 
-const carentOrder = useOrdersStore().orders.find(
-  (order) => order.id === useOrdersStore().idOpenOrder
+const carentOrder = useGeneralStore().orders.find(
+  (order) => order.id === useGeneralStore().idOpenOrder
 );
 </script>
 

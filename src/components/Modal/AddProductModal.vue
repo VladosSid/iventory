@@ -10,7 +10,7 @@
     >
       Название продукта
       <input
-        v-model="useProductsStore().newProduct.title"
+        v-model="useGeneralStore().newProduct.title"
         type="text"
         name="prodName"
         class="input"
@@ -24,7 +24,7 @@
     >
       Серийний номер продукта
       <input
-        v-model="useProductsStore().newProduct.serialNumber"
+        v-model="useGeneralStore().newProduct.serialNumber"
         type="text"
         name="serialNumber"
         class="input"
@@ -40,7 +40,7 @@
         id="used"
         value="false"
         checked
-        @input="useProductsStore().newProduct.isNew = false"
+        @input="useGeneralStore().newProduct.isNew = false"
       />
 
       <label for="isNew"> New </label>
@@ -49,7 +49,7 @@
         name="isNew"
         id="isNew"
         value="true"
-        @input="useProductsStore().newProduct.isNew = true"
+        @input="useGeneralStore().newProduct.isNew = true"
       />
     </div>
 
@@ -84,18 +84,18 @@
 <script setup>
 import { onUnmounted } from "vue";
 
-import { useProductsStore } from "../../store/productsStore";
-import { useOrdersStore } from "../../store/ordersStore";
+// import { useProductsStore } from "../../store/productsStore";
+// import { useOrdersStore } from "../../store/ordersStore";
 import { useGeneralStore } from "../../store/generalStore";
 
 import newProd from "../../helpers/request/addNewProduct";
 
 const selected = (e) => {
-  useProductsStore().newProduct.type = e.target.value;
+  useGeneralStore().newProduct.type = e.target.value;
 };
 
-const orderTitle = useOrdersStore().orders.find(
-  (order) => order.id === useOrdersStore().idOpenOrder
+const orderTitle = useGeneralStore().orders.find(
+  (order) => order.id === useGeneralStore().idOpenOrder
 );
 
 const close = () => {
@@ -108,7 +108,7 @@ const submit = () => {
 };
 
 onUnmounted(() => {
-  useProductsStore().newProduct = {
+  useGeneralStore().newProduct = {
     serialNumber: "",
     title: "",
     type: "",

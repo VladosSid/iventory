@@ -2,12 +2,12 @@
   <input
     type="text"
     placeholder="Поиск"
-    v-model="useOrdersStore().searchQuery"
+    v-model="useGeneralStore().searchQuery"
   />
 </template>
 
 <script setup>
-import { useOrdersStore } from "../../store/ordersStore";
+import { useGeneralStore } from "../../store/generalStore";
 
 const props = defineProps({
   test: String,

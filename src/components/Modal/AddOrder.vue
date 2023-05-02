@@ -10,7 +10,7 @@
     >
       Введите название прихода
       <input
-        v-model="useOrdersStore().newOrderTitle"
+        v-model="useGeneralStore().newOrderTitle"
         type="text"
         name="orderName"
         class="input"
@@ -32,7 +32,7 @@
 <script setup>
 import { onUnmounted } from "vue";
 
-import { useOrdersStore } from "../../store/ordersStore";
+// import { useOrdersStore } from "../../store/ordersStore";
 import { useGeneralStore } from "../../store/generalStore";
 
 import addNewOrder from "../../helpers/request/addNewOrder";
@@ -47,7 +47,7 @@ const submit = () => {
 };
 
 onUnmounted(() => {
-  useOrdersStore().newOrderTitle = "";
+  useGeneralStore().newOrderTitle = "";
 });
 </script>
 

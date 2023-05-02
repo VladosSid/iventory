@@ -46,13 +46,13 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-import { useProductsStore } from "../../store/productsStore";
+// import { useProductsStore } from "../../store/productsStore";
 import ProductsItem from "./ProductsItem.vue";
 
 import ModalWindow from "../Modal/ModalWindow.vue";
 import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
 
-const data = useProductsStore();
+const data = useGeneralStore();
 </script>
 
 <style lang="scss" scoped>

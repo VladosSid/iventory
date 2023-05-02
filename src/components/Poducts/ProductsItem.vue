@@ -106,7 +106,7 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-import { useOrdersStore } from "../../store/ordersStore";
+// import { useOrdersStore } from "../../store/ordersStore";
 import refactorDate from "../../helpers/refactorDate";
 
 const props = defineProps({
@@ -122,7 +122,7 @@ const props = defineProps({
   date: String,
 });
 
-const titelOrder = useOrdersStore().orders.find(
+const titelOrder = useGeneralStore().orders.find(
   (order) => order.id === props.orderId
 );
 

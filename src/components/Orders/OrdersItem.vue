@@ -2,17 +2,17 @@
   <li
     class="order-item"
     :class="{
-      orderIsOpen: useOrdersStore().isOpen === true,
-      orderClose: useOrdersStore().isOpen === false,
+      orderIsOpen: useGeneralStore().isOpen === true,
+      orderClose: useGeneralStore().isOpen === false,
     }"
   >
     <p
-      v-if="!useOrdersStore().isOpen"
+      v-if="!useGeneralStore().isOpen"
       class="order-item__name"
       @click="
-        useOrdersStore().isOpen = true;
-        useOrdersStore().idOpenOrder = id;
-        useOrdersStore().currentOrderOpenId = id;
+        useGeneralStore.isOpen = true;
+        useGeneralStore.idOpenOrder = id;
+        useGeneralStore.currentOrderOpenId = id;
       "
     >
       {{ title }}
@@ -29,9 +29,10 @@
       <span
         class="order-item__quantity-icon"
         @click="
-          useOrdersStore().isOpen = true;
-          useOrdersStore().idOpenOrder = id;
-          useOrdersStore().currentOrderOpenId = id;
+          useGeneralStore().isOpen = true;
+          useGeneralStore.idOpenOrder = id;
+          useGeneralStore().idOpenOrder = id;
+          useGeneralStore().currentOrderOpenId = id;
         "
       >
         <svg
@@ -66,7 +67,7 @@
     </p>
 
     <p
-      v-if="!useOrdersStore().isOpen"
+      v-if="!useGeneralStore().isOpen"
       class="order-item__sum order-item__info--positions"
     >
       {{ priceCount.USD }} &#36;
@@ -77,12 +78,12 @@
     </p>
 
     <button
-      v-if="!useOrdersStore().isOpen"
+      v-if="!useGeneralStore().isOpen"
       @click.prevent="
         () => {
-          generalStore.showModal = true;
-          generalStore.idModalProducts = prodList;
-          generalStore.idDeleteOrder = id;
+          useGeneralStore.showModal = true;
+          useGeneralStore.idModalProducts = prodList;
+          useGeneralStore.idDeleteOrder = id;
         }
       "
       class="order-item__delete"
@@ -102,7 +103,7 @@
     </button>
 
     <div
-      v-if="useOrdersStore().currentOrderOpenId === id"
+      v-if="useGeneralStore().currentOrderOpenId === id"
       class="order-item__current"
     ></div>
   </li>
@@ -110,7 +111,7 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-import { useOrdersStore } from "../../store/ordersStore";
+// import { useOrdersStore } from "../../store/ordersStore";
 
 import currentDate from "../../helpers/currentDate";
 import refactorDate from "../../helpers/refactorDate";
@@ -119,7 +120,7 @@ import { listProdacts } from "../../helpers/orderListProdacts";
 
 const { day, month, year } = currentDate();
 
-const generalStore = useGeneralStore();
+// const generalStore = useGeneralStore();
 
 const props = defineProps({
   id: String,

@@ -15,18 +15,18 @@
       <IconAdd />
     </svg>
 
-    <b>Приходы / {{ data.orders.length }}</b>
+    <b>Приходы / {{ generalStore.orders.length }}</b>
   </div>
 
   <div
     :class="{
-      gridContainer: useOrdersStore().isOpen === true,
+      gridContainer: useGeneralStore().isOpen === true,
     }"
   >
     <ul style="display: flex; flex-direction: column; gap: 10px">
       <OrdersItem
-        v-if="useOrdersStore().filterOrders.length !== 0"
-        v-for="{ id, title, date } in useOrdersStore().filterOrders"
+        v-if="useGeneralStore().filterOrders.length !== 0"
+        v-for="{ id, title, date } in useGeneralStore().filterOrders"
         :key="id"
         :id="id"
         :title="title"
@@ -36,7 +36,7 @@
       <b v-else>Ничего не найдено</b>
     </ul>
 
-    <OrderListProdact v-if="useOrdersStore().isOpen" />
+    <OrderListProdact v-if="useGeneralStore().isOpen" />
   </div>
 
   <ModalWindow v-if="generalStore.showModal">
@@ -68,7 +68,7 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-import { useOrdersStore } from "../../store/ordersStore";
+// import { useOrdersStore } from "../../store/ordersStore";
 
 import ModalWindow from "../Modal/ModalWindow.vue";
 import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
@@ -80,7 +80,6 @@ import IconAdd from "../icons/IconAdd.vue";
 import OrderListProdact from "./OrderListProdact.vue";
 
 const generalStore = useGeneralStore();
-const data = useOrdersStore();
 </script>
 
 <style lang="scss" scoped>

@@ -12,8 +12,8 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-import { useOrdersStore } from "../../store/ordersStore";
-import { useProductsStore } from "../../store/productsStore";
+// import { useOrdersStore } from "../../store/ordersStore";
+// import { useProductsStore } from "../../store/productsStore";
 
 const show = useGeneralStore().showModal;
 
@@ -22,8 +22,8 @@ const close = () => {
   useGeneralStore().idModalProducts = null;
   useGeneralStore().addModalOrder = false;
   useGeneralStore().addModalProd = false;
-  useOrdersStore().newOrderTitle = "";
-  useProductsStore().newProduct = {
+  useGeneralStore().newOrderTitle = "";
+  useGeneralStore().newProduct = {
     serialNumber: "",
     title: "",
     type: "",

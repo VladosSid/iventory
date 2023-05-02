@@ -45,7 +45,7 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-import { useOrdersStore } from "../../store/ordersStore";
+// import { useOrdersStore } from "../../store/ordersStore";
 
 const close = () => {
   useGeneralStore().showModal = false;
@@ -55,7 +55,7 @@ const close = () => {
 
 const submit = () => {
   if (useGeneralStore().idDeleteOrder) {
-    useOrdersStore().getDeleteOrder(useGeneralStore().idDeleteOrder);
+    // useOrdersStore().getDeleteOrder(useGeneralStore().idDeleteOrder);
     close();
 
     return;
