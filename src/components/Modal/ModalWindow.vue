@@ -6,15 +6,6 @@
 
         <slot name="body"> </slot>
       </div>
-
-      <div class="modal-container__footer">
-        <button class="modal-container__footer__button-cancel" @click="close">
-          Отмена
-        </button>
-        <button class="modal-container__footer__button" @click="submit">
-          {{ useGeneralStore().addModalOrder ? "Добавить" : "Удлить" }}
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -22,8 +13,10 @@
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
 import { useOrdersStore } from "../../store/ordersStore";
+import { useProductsStore } from "../../store/productsStore";
 
 import addNewOrder from "../../helpers/request/addNewOrder";
+import newProd from "../../helpers/request/addNewProduct";
 
 const show = useGeneralStore().showModal;
 
@@ -33,19 +26,13 @@ const close = () => {
   useGeneralStore().addModalOrder = false;
   useGeneralStore().addModalProd = false;
   useOrdersStore().newOrderTitle = "";
-};
-
-const submit = () => {
-  if (useGeneralStore().addModalOrder) {
-    return addNewOrder();
-  }
-
-  if (useGeneralStore().addModalProd) {
-    // SHEMA
-    return console.log("add PRODUCT");
-  }
-
-  console.log("order delete");
+  useProductsStore().newProduct = {
+    serialNumber: "",
+    title: "",
+    type: "",
+    orderId: "",
+    isNew: false,
+  };
 };
 </script>
 
@@ -92,60 +79,6 @@ const submit = () => {
     box-shadow: -10px 15px 42px -22px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: -10px 15px 42px -22px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -10px 15px 42px -22px rgba(0, 0, 0, 0.75);
-  }
-
-  &__footer {
-    display: flex;
-    justify-content: end;
-    gap: 15px;
-    background: green;
-    padding: 15px;
-
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-
-    &__button-cancel {
-      background: green;
-
-      color: #fff;
-      border: none;
-      text-align: center;
-      padding: 8px;
-      font-size: 17px;
-      font-weight: 500;
-      min-width: 150px;
-      border-radius: 30px;
-
-      &:hover,
-      &:focus {
-        background: #000;
-      }
-
-      transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    &__button {
-      background: #fff;
-      color: red;
-      border: none;
-      text-align: center;
-      padding: 8px;
-      font-size: 17px;
-      font-weight: 500;
-      min-width: 150px;
-      border-radius: 30px;
-
-      &:hover,
-      &:focus {
-        box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
-        -webkit-box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
-        scale: 101%;
-      }
-
-      transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-        scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
   }
 }
 </style>

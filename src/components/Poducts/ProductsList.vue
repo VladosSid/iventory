@@ -37,6 +37,8 @@
         <template v-slot:title
           >Ви уверены, что хотите удалить продукт?</template
         >
+
+        <template v-slot:button>Удалить</template>
       </ModalDeleteOrders>
     </template>
   </ModalWindow>

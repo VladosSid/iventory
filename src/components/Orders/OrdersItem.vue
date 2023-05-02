@@ -12,6 +12,7 @@
       @click="
         useOrdersStore().isOpen = true;
         useOrdersStore().idOpenOrder = id;
+        useOrdersStore().currentOrderOpenId = id;
       "
     >
       {{ title }}
@@ -30,6 +31,7 @@
         @click="
           useOrdersStore().isOpen = true;
           useOrdersStore().idOpenOrder = id;
+          useOrdersStore().currentOrderOpenId = id;
         "
       >
         <svg
@@ -80,6 +82,7 @@
         () => {
           generalStore.showModal = true;
           generalStore.idModalProducts = prodList;
+          useOrdersStore().idOpenOrder = id;
         }
       "
       class="order-item__delete"
@@ -99,7 +102,7 @@
     </button>
 
     <div
-      v-if="useOrdersStore().idOpenOrder === id"
+      v-if="useOrdersStore().currentOrderOpenId === id"
       class="order-item__current"
     ></div>
   </li>

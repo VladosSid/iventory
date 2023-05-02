@@ -29,7 +29,8 @@
     <ul class="order-prod__list">
       <li
         class="order-prod__item"
-        v-for="{ id, title, serialNumber, isNew, photo } in data"
+        v-for="{ id, title, serialNumber, isNew, photo } in useOrdersStore()
+          .currentOrderProd"
         :key="id"
       >
         <div
@@ -95,6 +96,7 @@
       @click="
         useOrdersStore().isOpen = false;
         useOrdersStore().idOpenOrder = null;
+        useOrdersStore().currentOrderOpenId = null;
       "
     >
       <svg
@@ -117,13 +119,12 @@
 import { useOrdersStore } from "../../store/ordersStore";
 import { useProductsStore } from "../../store/productsStore";
 import { useGeneralStore } from "../../store/generalStore";
-import { listProdacts } from "../../helpers/orderListProdacts";
 
 import IconAdd from "../icons/IconAdd.vue";
+
 const carentOrder = useOrdersStore().orders.find(
   (order) => order.id === useOrdersStore().idOpenOrder
 );
-const data = listProdacts(useOrdersStore().idOpenOrder);
 </script>
 
 <style lang="scss" scoped>

@@ -67,16 +67,44 @@
     </label>
   </form>
 
-  <p></p>
+  <p style="padding: 0 15px">
+    Продукт будет добавлен в приход: <br />"{{ orderTitle.title }}"
+  </p>
+
+  <div class="add-prod__footer">
+    <button class="add-prod__footer__button-cancel" @click="close">
+      Отмена
+    </button>
+    <button class="add-prod__footer__button" @click="submit">
+      <slot name="button"></slot>
+    </button>
+  </div>
 </template>
 
 <script setup>
 import { onUnmounted } from "vue";
 
 import { useProductsStore } from "../../store/productsStore";
+import { useOrdersStore } from "../../store/ordersStore";
+import { useGeneralStore } from "../../store/generalStore";
+
+import newProd from "../../helpers/request/addNewProduct";
 
 const selected = (e) => {
   useProductsStore().newProduct.type = e.target.value;
+};
+
+const orderTitle = useOrdersStore().orders.find(
+  (order) => order.id === useOrdersStore().idOpenOrder
+);
+
+const close = () => {
+  useGeneralStore().showModal = false;
+  useGeneralStore().addModalProd = false;
+};
+
+const submit = () => {
+  newProd();
 };
 
 onUnmounted(() => {
@@ -102,5 +130,59 @@ onUnmounted(() => {
   box-shadow: 0px 23px 6px -21px rgba(0, 0, 0, 0.75) inset;
   -webkit-box-shadow: 0px 23px 6px -21px rgba(0, 0, 0, 0.75) inset;
   -moz-box-shadow: 0px 23px 6px -21px rgba(0, 0, 0, 0.75) inset;
+}
+
+.add-prod__footer {
+  display: flex;
+  justify-content: end;
+  gap: 15px;
+  background: green;
+  padding: 15px;
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  &__button-cancel {
+    background: green;
+
+    color: #fff;
+    border: none;
+    text-align: center;
+    padding: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    min-width: 150px;
+    border-radius: 30px;
+
+    &:hover,
+    &:focus {
+      background: #000;
+    }
+
+    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__button {
+    background: #fff;
+    color: red;
+    border: none;
+    text-align: center;
+    padding: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    min-width: 150px;
+    border-radius: 30px;
+
+    &:hover,
+    &:focus {
+      box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 30px -10px rgba(0, 0, 0, 0.75);
+      scale: 101%;
+    }
+
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 </style>

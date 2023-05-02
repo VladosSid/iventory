@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 
+import { useProductsStore } from "./productsStore";
+
 export const useOrdersStore = defineStore("orders", {
   state: () => ({
     orders: [
@@ -26,8 +28,60 @@ export const useOrdersStore = defineStore("orders", {
       },
     ],
 
+    searchQuery: "",
+
     isOpen: false,
     idOpenOrder: null,
+    currentOrderOpenId: null,
+    currentOrderProd: [],
     newOrderTitle: "",
   }),
+
+  getters: {
+    currentOrderProduct(state) {
+      if (!state.idOpenOrder) {
+        state.currentOrderProd = [];
+        return;
+      }
+
+      state.currentOrderProd = [];
+
+      const listId = state.orders.find(
+        (order) => order.id === state.idOpenOrder
+      ).productsId;
+
+      listId.reduce((arr, i) => {
+        state.currentOrderProd.push(
+          useProductsStore().products.find((prod) => prod.id === i)
+        );
+      }, []);
+    },
+
+    filterOrders(state) {
+      return state.orders.filter((order) =>
+        order.title.toLowerCase().includes(state.searchQuery.toLowerCase())
+      );
+
+      filterList;
+    },
+  },
+
+  actions: {
+    getAddNewOrder(newOrder) {
+      try {
+        this.orders.push(newOrder);
+        return this.orders;
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
+
+    getDeleteOrder(idOrder) {
+      try {
+        this.orders = this.orders.filter((order) => order.id !== idOrder);
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
+  },
 });

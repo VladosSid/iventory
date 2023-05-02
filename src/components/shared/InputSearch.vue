@@ -1,8 +1,14 @@
 <template>
-  <input type="text" placeholder="Поиск" />
+  <input
+    type="text"
+    placeholder="Поиск"
+    v-model="useOrdersStore().searchQuery"
+  />
 </template>
 
 <script setup>
+import { useOrdersStore } from "../../store/ordersStore";
+
 const props = defineProps({
   test: String,
 });

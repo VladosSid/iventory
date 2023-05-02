@@ -25,12 +25,15 @@
   >
     <ul style="display: flex; flex-direction: column; gap: 10px">
       <OrdersItem
-        v-for="{ id, title, date, productsId } in data.orders"
+        v-if="useOrdersStore().filterOrders.length !== 0"
+        v-for="{ id, title, date } in useOrdersStore().filterOrders"
         :key="id"
         :id="id"
         :title="title"
         :date="date"
       />
+
+      <b v-else>Ничего не найдено</b>
     </ul>
 
     <OrderListProdact v-if="useOrdersStore().isOpen" />
@@ -46,14 +49,18 @@
         <template v-slot:title>
           Ви уверены, что хотите удалить приход?
         </template>
+
+        <template v-slot:button>Удалить</template>
       </ModalDeleteOrders>
 
       <ModalAddOrder v-if="useGeneralStore().addModalOrder">
         <template v-slot:title> Добавить приход </template>
+        <template v-slot:button>Добавить</template>
       </ModalAddOrder>
 
       <AddProductModal v-if="useGeneralStore().addModalProd">
         <template v-slot:title> Добавить продукт </template>
+        <template v-slot:button>Добавить</template>
       </AddProductModal>
     </template>
   </ModalWindow>

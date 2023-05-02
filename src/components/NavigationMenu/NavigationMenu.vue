@@ -8,7 +8,7 @@
       </li>
 
       <li class="nav-menu__item">
-        <router-link class="nav-menu__link" to="/products">группи</router-link>
+        <router-link class="nav-menu__link" to="/products">группы</router-link>
       </li>
     </ul>
   </div>
