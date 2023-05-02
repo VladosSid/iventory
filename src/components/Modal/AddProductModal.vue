@@ -108,6 +108,7 @@ const submit = () => {
 };
 
 onUnmounted(() => {
+  console.log("clear");
   useGeneralStore().newProduct = {
     serialNumber: "",
     title: "",

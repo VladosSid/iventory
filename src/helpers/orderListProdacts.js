@@ -1,5 +1,3 @@
-// import { useOrdersStore } from "../store/ordersStore";
-// import { useProductsStore } from "../store/productsStore";
 import { useGeneralStore } from "../store/generalStore";
 
 export function listProdacts(orderId) {

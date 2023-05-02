@@ -118,13 +118,9 @@
 </template>
 
 <script setup>
-// import { useOrdersStore } from "../../store/ordersStore";
-// import { useProductsStore } from "../../store/productsStore";
 import { useGeneralStore } from "../../store/generalStore";
 
 import { listProdacts } from "../../helpers/orderListProdacts";
-
-// const order = useOrdersStore();
 
 import IconAdd from "../icons/IconAdd.vue";
 

@@ -20,6 +20,7 @@ import UserLogo from "./UserLogo.vue";
 
 <style lang="scss" scoped>
 .nav-menu {
+  z-index: 199;
   flex: 1;
   position: fixed;
 
@@ -30,6 +31,8 @@ import UserLogo from "./UserLogo.vue";
 
   height: 100%;
   padding: 50px 15px;
+
+  background: #d9dde6;
 
   box-shadow: 13px 0px 22px -13px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 13px 0px 22px -13px rgba(0, 0, 0, 0.75);

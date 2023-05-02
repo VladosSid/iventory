@@ -1,8 +1,7 @@
 import { boolean, object, string } from "yup";
 
 import { useGeneralStore } from "../../store/generalStore";
-// import { useOrdersStore } from "../../store/ordersStore";
-
+import currentDate from "../../helpers/currentDate";
 const schema = object({
   title: string().required(),
   serialNumber: string().required(),
@@ -12,11 +11,12 @@ const schema = object({
 });
 
 export default async function newProd() {
+  const { minutes, hours, day, month, year, seconds } = currentDate();
   const schemaNewProd = await schema.validate({
     title: useGeneralStore().newProduct.title,
     serialNumber: useGeneralStore().newProduct.serialNumber,
     type: useGeneralStore().newProduct.type,
-    orderId: useGeneralStore().newProduct.orderId,
+    orderId: useGeneralStore().idOpenOrder,
     isNew: useGeneralStore().newProduct.isNew,
   });
 
@@ -39,9 +39,22 @@ export default async function newProd() {
       start: `${new Date().toISOString().slice(0, 10)} ${new Date()
         .toISOString()
         .slice(11, 19)}`,
-      end: `${new Date().toISOString().slice(0, 4) + 1}`,
+      end: `${(
+        Number(new Date().toISOString().slice(0, 4)) + 1
+      ).toString()}-${new Date().toISOString().slice(5, 10)} ${new Date()
+        .toISOString()
+        .slice(11, 19)}`,
+      price: [
+        { value: 503, symbol: "USD", isDefault: 0 },
+        { value: 1234, symbol: "UAH", isDefault: 1 },
+      ],
+
+      date: `${new Date().toISOString().slice(0, 10)} ${new Date()
+        .toISOString()
+        .slice(11, 19)}`,
+      photo: "ImgProd.jpg",
     },
   };
 
-  console.log(newProd);
+  useGeneralStore().getAddNewProduct(newProd);
 }

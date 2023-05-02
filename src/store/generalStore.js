@@ -35,21 +35,21 @@ export const useGeneralStore = defineStore("general", {
 
     orders: [
       {
-        id: "1",
+        id: "1as134fsd",
         title: "Длинное при длинное название",
         date: "2017-06-29 12:09:33",
         description: "desc",
         productsId: ["11", "12"],
       },
       {
-        id: "2",
+        id: "223fsf2",
         title: "Самое длинное название, длинее всех длинных ",
         date: "2015-06-29 12:09:33",
         description: "desc",
         productsId: ["21", "22"],
       },
       {
-        id: "3",
+        id: "3234fs3",
         title: "Длинюю ююю юююююю юююю ююющее название ",
         date: "2018-01-20 14:09:33",
         description: "desc",
@@ -74,7 +74,7 @@ export const useGeneralStore = defineStore("general", {
           { value: 503, symbol: "USD", isDefault: 0 },
           { value: 1234, symbol: "UAH", isDefault: 1 },
         ],
-        orderId: "1",
+        orderId: "1as134fsd",
         date: "2017-06-29 12:09:33",
       },
 
@@ -94,7 +94,7 @@ export const useGeneralStore = defineStore("general", {
           { value: 1110, symbol: "USD", isDefault: 0 },
           { value: 43852, symbol: "UAH", isDefault: 1 },
         ],
-        orderId: "1",
+        orderId: "1as134fsd",
 
         date: "2017-06-29 12:09:33",
       },
@@ -115,7 +115,7 @@ export const useGeneralStore = defineStore("general", {
           { value: 124, symbol: "USD", isDefault: 0 },
           { value: 2423, symbol: "UAH", isDefault: 1 },
         ],
-        orderId: "2",
+        orderId: "223fsf2",
         date: "2015-06-29 12:09:33",
       },
 
@@ -135,7 +135,7 @@ export const useGeneralStore = defineStore("general", {
           { value: 6785, symbol: "USD", isDefault: 0 },
           { value: 2125, symbol: "UAH", isDefault: 1 },
         ],
-        orderId: "2",
+        orderId: "223fsf2",
         date: "2016-10-29 12:09:33",
       },
 
@@ -155,7 +155,7 @@ export const useGeneralStore = defineStore("general", {
           { value: 1050, symbol: "USD", isDefault: 0 },
           { value: 260465, symbol: "UAH", isDefault: 1 },
         ],
-        orderId: "3",
+        orderId: "3234fs3",
         date: "2018-01-20 14:09:33",
       },
     ],
@@ -189,10 +189,10 @@ export const useGeneralStore = defineStore("general", {
   },
 
   actions: {
+    // Orders
     getAddNewOrder(newOrder) {
       try {
         this.orders.push(newOrder);
-        return this.orders;
       } catch (err) {
         console.log(err.message);
       }
@@ -201,6 +201,22 @@ export const useGeneralStore = defineStore("general", {
     getDeleteOrder(idOrder) {
       try {
         this.orders = this.orders.filter((order) => order.id !== idOrder);
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
+
+    // Products
+    getAddNewProduct(newProduct) {
+      try {
+        this.products.push(newProduct);
+
+        const order = this.orders.find(
+          (order) => order.id === newProduct.orderId
+        );
+        order.productsId.push(newProduct.id);
+        console.log(this.orders);
+        console.log(order);
       } catch (err) {
         console.log(err.message);
       }
