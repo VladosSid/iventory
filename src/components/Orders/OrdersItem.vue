@@ -81,9 +81,9 @@
       v-if="!useGeneralStore().isOpen"
       @click.prevent="
         () => {
-          useGeneralStore.showModal = true;
-          useGeneralStore.idModalProducts = prodList;
-          useGeneralStore.idDeleteOrder = id;
+          useGeneralStore().showModal = true;
+          useGeneralStore().idModalProducts = prodList;
+          useGeneralStore().idDeleteOrder = id;
         }
       "
       class="order-item__delete"

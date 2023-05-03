@@ -44,18 +44,17 @@
 </template>
 
 <script setup>
+import { onUnmounted } from "vue";
 import { useGeneralStore } from "../../store/generalStore";
 // import { useOrdersStore } from "../../store/ordersStore";
 
 const close = () => {
   useGeneralStore().showModal = false;
-  useGeneralStore().idModalProducts = null;
-  useGeneralStore().idDeleteOrder = null;
 };
 
 const submit = () => {
   if (useGeneralStore().idDeleteOrder) {
-    // useOrdersStore().getDeleteOrder(useGeneralStore().idDeleteOrder);
+    useGeneralStore().getDeleteOrder(useGeneralStore().idDeleteOrder);
     close();
 
     return;
@@ -63,6 +62,11 @@ const submit = () => {
   console.log("prod delete");
   close();
 };
+
+onUnmounted(() => {
+  useGeneralStore().idDeleteOrder = null;
+  useGeneralStore().idModalProducts = null;
+});
 </script>
 
 <style lang="scss" scoped>
