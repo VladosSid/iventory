@@ -38,34 +38,11 @@
 
     <OrderListProdact v-if="useGeneralStore().isOpen" />
   </div>
-
-  <!-- <transition name="fade">
-    <ModalWindow v-if="generalStore.showModal">
-      <template v-slot:body>
-        <ModalDeleteOrders
-          v-if="
-            !useGeneralStore().addModalOrder && !useGeneralStore().addModalProd
-          "
-        >
-          <template v-slot:title>
-            Ви уверены, что хотите удалить приход?
-          </template>
-
-          <template v-slot:button>Удалить</template>
-        </ModalDeleteOrders>
-      </template>
-    </ModalWindow>
-  </transition> -->
 </template>
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
 // import { useOrdersStore } from "../../store/ordersStore";
-
-import ModalWindow from "../Modal/ModalWindow.vue";
-import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
-import ModalAddOrder from "../Modal/AddOrder.vue";
-import AddProductModal from "../Modal/AddProductModal.vue";
 
 import OrdersItem from "./OrdersItem.vue";
 import IconAdd from "../icons/IconAdd.vue";
@@ -75,24 +52,6 @@ const generalStore = useGeneralStore();
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active {
-  animation: fade-in 0.5s;
-}
-.fade-leave-active {
-  animation: fade-in 0.5s reverse;
-}
-@keyframes fade-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 2fr;

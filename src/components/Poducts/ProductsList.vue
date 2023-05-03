@@ -1,6 +1,58 @@
 <template>
   <div class="add-orders">
     <b>Продукты / {{ data.products.length }}</b>
+    <form
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      "
+    >
+      <label
+        for="prodName"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+        "
+      >
+        Тип:
+
+        <select
+          style="width: 200px; padding: 5px"
+          name="list-type"
+          @input="(e) => selectedType(e)"
+        >
+          <option value="All">All</option>
+          <option value="Monitors">Monitors</option>
+          <option value="Phone">Phone</option>
+        </select>
+      </label>
+
+      <label
+        for="prodName"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+        "
+      >
+        Спецификация:
+
+        <select
+          style="width: 200px; padding: 5px"
+          name="list-type"
+          @input="(e) => selectedSpecific(e)"
+        >
+          <option value="All">All</option>
+          <option value="Specification 1">Specification 1</option>
+          <option value="Specification 2">Specification 2</option>
+        </select>
+      </label>
+    </form>
   </div>
 
   <ul style="display: flex; flex-direction: column; gap: 10px">
@@ -16,7 +68,7 @@
         price,
         date,
         orderId,
-      } in data.products"
+      } in useGeneralStore().filterProductsType"
       :key="id"
       :id="id"
       :serialNumber="serialNumber"
@@ -30,20 +82,6 @@
       :date="date"
     />
   </ul>
-
-  <!-- <transition name="modal">
-    <ModalWindow v-if="useGeneralStore().showModal">
-      <template v-slot:body>
-        <ModalDeleteOrders>
-          <template v-slot:title
-            >Ви уверены, что хотите удалить продукт?</template
-          >
-
-          <template v-slot:button>Удалить</template>
-        </ModalDeleteOrders>
-      </template>
-    </ModalWindow>
-  </transition> -->
 </template>
 
 <script setup>
@@ -51,9 +89,16 @@ import { useGeneralStore } from "../../store/generalStore";
 // import { useProductsStore } from "../../store/productsStore";
 import ProductsItem from "./ProductsItem.vue";
 
-import ModalWindow from "../Modal/ModalWindow.vue";
-import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
+// import ModalWindow from "../Modal/ModalWindow.vue";
+// import ModalDeleteOrders from "../Modal/ModalDeleteOrders.vue";
 
+const selectedType = (e) => {
+  useGeneralStore().filterTypeProduct = e.target.value;
+};
+
+const selectedSpecific = (e) => {
+  useGeneralStore().filterSpecificProduct = e.target.value;
+};
 const data = useGeneralStore();
 </script>
 

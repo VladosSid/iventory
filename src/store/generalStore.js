@@ -14,7 +14,6 @@ export const useGeneralStore = defineStore("general", {
     idDeleteProduct: false,
 
     // ORDER STORE
-    // current order product
     searchQuery: "",
 
     isOpen: false,
@@ -25,6 +24,9 @@ export const useGeneralStore = defineStore("general", {
     newOrderTitle: "",
 
     // PRODUCTS STORE
+    filterTypeProduct: "All",
+    filterSpecificProduct: "All",
+
     prodactIsOpen: false,
     newProduct: {
       serialNumber: "",
@@ -87,7 +89,7 @@ export const useGeneralStore = defineStore("general", {
           "https://photos.google.com/photo/AF1QipM8j2kZ88-NahXYp2ZdUazLUsPHKuOtj0mBAdd8",
         title: "Product 1",
         type: "Phone",
-        specification: "Specification 1",
+        specification: "Specification 2",
         guarantee: {
           start: "2017-06-29 12:09:33",
           end: "2017-06-29 12:09:33",
@@ -149,7 +151,7 @@ export const useGeneralStore = defineStore("general", {
         photo: "monitor.png",
         title: "Product 1",
         type: "Monitors",
-        specification: "Specification 1",
+        specification: "Specification 2",
         guarantee: {
           start: "2017-06-29 12:09:33",
           end: "2017-06-29 12:09:33",
@@ -188,6 +190,26 @@ export const useGeneralStore = defineStore("general", {
       return this.orders.filter((order) =>
         order.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+    },
+
+    filterProductsSpecific() {
+      if (this.filterSpecificProduct === "All") {
+        return this.products;
+      }
+
+      return this.products.filter(
+        (prod) => prod.specification === this.filterSpecificProduct
+      );
+    },
+
+    filterProductsType() {
+      const filterList = this.filterProductsSpecific;
+
+      if (this.filterTypeProduct === "All") {
+        return filterList;
+      }
+
+      return filterList.filter((prod) => prod.type === this.filterTypeProduct);
     },
   },
 

@@ -16,7 +16,11 @@ import AddProductModal from "./components/Modal/AddProductModal.vue";
     <NavigationMenu class="navigation-menu" />
 
     <main>
-      <router-view class="container-position__page-view"></router-view>
+      <router-view v-slot="{ Component }" class="container-position__page-view">
+        <transition name="page">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </main>
   </div>
 
@@ -50,7 +54,7 @@ import AddProductModal from "./components/Modal/AddProductModal.vue";
   animation: modal-in 0.5s;
 }
 .modal-leave-active {
-  animation: modal-in 0.5s reverse;
+  animation: modal-in 0s reverse;
 }
 @keyframes modal-in {
   0% {
@@ -61,6 +65,19 @@ import AddProductModal from "./components/Modal/AddProductModal.vue";
   }
   100% {
     transform: scale(1);
+  }
+}
+
+.page-enter-active {
+  animation: page-in 0.5s;
+}
+
+@keyframes page-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 .header {
