@@ -10,9 +10,9 @@
       v-if="!useGeneralStore().isOpen"
       class="order-item__name"
       @click="
-        useGeneralStore.isOpen = true;
-        useGeneralStore.idOpenOrder = id;
-        useGeneralStore.currentOrderOpenId = id;
+        useGeneralStore().isOpen = true;
+        useGeneralStore().idOpenOrder = id;
+        useGeneralStore().currentOrderOpenId = id;
       "
     >
       {{ title }}
@@ -30,7 +30,7 @@
         class="order-item__quantity-icon"
         @click="
           useGeneralStore().isOpen = true;
-          useGeneralStore.idOpenOrder = id;
+          useGeneralStore().idOpenOrder = id;
           useGeneralStore().idOpenOrder = id;
           useGeneralStore().currentOrderOpenId = id;
         "

@@ -19,7 +19,7 @@
       ></div>
 
       <img
-        src="../../assets/ImgProd.png"
+        src="../../assets/monitor.png"
         alt="Photo product"
         class="list-prod__photo"
       />
@@ -46,7 +46,6 @@
 <script setup>
 import { onUnmounted } from "vue";
 import { useGeneralStore } from "../../store/generalStore";
-// import { useOrdersStore } from "../../store/ordersStore";
 
 const close = () => {
   useGeneralStore().showModal = false;
@@ -59,13 +58,15 @@ const submit = () => {
 
     return;
   }
-  console.log("prod delete");
+  useGeneralStore().getDeleteProduct(useGeneralStore().idDeleteProduct);
   close();
 };
 
 onUnmounted(() => {
   useGeneralStore().idDeleteOrder = null;
   useGeneralStore().idModalProducts = null;
+  useGeneralStore().idDeleteProduct = null;
+  useGeneralStore().openModalDelete = false;
 });
 </script>
 

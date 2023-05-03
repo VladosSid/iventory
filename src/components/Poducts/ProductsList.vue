@@ -31,17 +31,19 @@
     />
   </ul>
 
-  <ModalWindow v-if="useGeneralStore().showModal">
-    <template v-slot:body>
-      <ModalDeleteOrders>
-        <template v-slot:title
-          >Ви уверены, что хотите удалить продукт?</template
-        >
+  <!-- <transition name="modal">
+    <ModalWindow v-if="useGeneralStore().showModal">
+      <template v-slot:body>
+        <ModalDeleteOrders>
+          <template v-slot:title
+            >Ви уверены, что хотите удалить продукт?</template
+          >
 
-        <template v-slot:button>Удалить</template>
-      </ModalDeleteOrders>
-    </template>
-  </ModalWindow>
+          <template v-slot:button>Удалить</template>
+        </ModalDeleteOrders>
+      </template>
+    </ModalWindow>
+  </transition> -->
 </template>
 
 <script setup>
@@ -56,6 +58,23 @@ const data = useGeneralStore();
 </script>
 
 <style lang="scss" scoped>
+.modal-enter-active {
+  animation: modal-in 0.5s;
+}
+.modal-leave-active {
+  animation: modal-in 0.5s reverse;
+}
+@keyframes modal-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .add-orders {
   display: flex;
   flex-direction: row;

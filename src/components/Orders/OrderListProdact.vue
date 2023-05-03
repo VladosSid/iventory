@@ -1,7 +1,13 @@
 <template>
   <div class="order-prod">
     <div class="order-prod__box-title">
-      <h2 class="order-prod__title">{{ carentOrder.title }}</h2>
+      <h2 class="order-prod__title">
+        {{
+          useGeneralStore().orders.find(
+            (order) => order.id === useGeneralStore().idOpenOrder
+          ).title
+        }}
+      </h2>
 
       <div
         class="order-prod__add-prod"
@@ -27,7 +33,7 @@
       </div>
     </div>
 
-    <ul class="order-prod__list">
+    <transition-group name="list" tag="ul" class="order-prod__list">
       <li
         class="order-prod__item"
         v-for="{ id, title, serialNumber, isNew, photo } in listProdacts(
@@ -44,7 +50,7 @@
         ></div>
 
         <img
-          src="../../assets/ImgProd.png"
+          src="../../assets/monitor.png"
           alt="Photo product"
           class="order-prod__item-photo"
         />
@@ -73,6 +79,8 @@
               useGeneralStore().idModalProducts = [
                 { id, serialNumber, isNew, photo, title },
               ];
+              useGeneralStore().idDeleteProduct = id;
+              useGeneralStore().openModalDelete = true;
             }
           "
           class="order-prod__item-delete"
@@ -91,7 +99,7 @@
           </svg>
         </button>
       </li>
-    </ul>
+    </transition-group>
 
     <div
       class="order-prod__close"
@@ -99,6 +107,7 @@
         useGeneralStore().isOpen = false;
         useGeneralStore().idOpenOrder = null;
         useGeneralStore().currentOrderOpenId = null;
+        useGeneralStore().idDeleteProduct = id;
       "
     >
       <svg
@@ -124,12 +133,26 @@ import { listProdacts } from "../../helpers/orderListProdacts";
 
 import IconAdd from "../icons/IconAdd.vue";
 
-const carentOrder = useGeneralStore().orders.find(
-  (order) => order.id === useGeneralStore().idOpenOrder
-);
+// const carentOrder = useGeneralStore().orders.find(
+//   (order) => order.id === useGeneralStore().idOpenOrder
+// );
 </script>
 
 <style lang="scss" scoped>
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 .order-prod {
   position: relative;
   border: 1px solid #c7c7c6;

@@ -10,6 +10,7 @@ export const useGeneralStore = defineStore("general", {
     addModalProd: false,
     // delete modal
     idDeleteOrder: false,
+    openModalDelete: false,
     idDeleteProduct: false,
 
     // ORDER STORE
@@ -62,7 +63,7 @@ export const useGeneralStore = defineStore("general", {
         id: "11",
         serialNumber: "123",
         isNew: false,
-        photo: "ImgProd.jpg",
+        photo: "monitor.png",
         title: "Gigabyte Technology X58-USB3 (Socket 1366) 6",
         type: "Monitors",
         specification: "Specification 1",
@@ -82,9 +83,10 @@ export const useGeneralStore = defineStore("general", {
         id: "12",
         serialNumber: "1234",
         isNew: true,
-        photo: "ImgProd.jpg",
+        photo:
+          "https://photos.google.com/photo/AF1QipM8j2kZ88-NahXYp2ZdUazLUsPHKuOtj0mBAdd8",
         title: "Product 1",
-        type: "Monitors",
+        type: "Phone",
         specification: "Specification 1",
         guarantee: {
           start: "2017-06-29 12:09:33",
@@ -103,9 +105,10 @@ export const useGeneralStore = defineStore("general", {
         id: "21",
         serialNumber: "234",
         isNew: true,
-        photo: "ImgProd.jpg",
+        photo:
+          "https://drive.google.com/file/d/1GWg2VSq2H7D3dmyiR5lkkgKYEZTeEcYa/view?usp=share_link",
         title: "Product 1",
-        type: "Monitors",
+        type: "Phone",
         specification: "Specification 1",
         guarantee: {
           start: "2019-03-29 12:09:33",
@@ -123,7 +126,7 @@ export const useGeneralStore = defineStore("general", {
         id: "22",
         serialNumber: "2345",
         isNew: false,
-        photo: "ImgProd.jpg",
+        photo: "monitor.png",
         title: "Product 1",
         type: "Monitors",
         specification: "Specification 1",
@@ -143,7 +146,7 @@ export const useGeneralStore = defineStore("general", {
         id: "31",
         serialNumber: "345",
         isNew: true,
-        photo: "ImgProd.jpg",
+        photo: "monitor.png",
         title: "Product 1",
         type: "Monitors",
         specification: "Specification 1",
@@ -215,8 +218,31 @@ export const useGeneralStore = defineStore("general", {
           (order) => order.id === newProduct.orderId
         );
         order.productsId.push(newProduct.id);
-        console.log(this.orders);
-        console.log(order);
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
+
+    getDeleteProduct(idProd) {
+      console.log("id Prod", idProd);
+      try {
+        const idOrder = this.products.find((prod) => prod.id === idProd);
+
+        console.log("id order", idOrder);
+
+        const order = this.orders.findIndex(
+          (order) => order.id === idOrder.orderId
+        );
+
+        console.log("order", order);
+
+        const idIndex = this.orders[order].productsId.findIndex(
+          (id) => id === idProd
+        );
+
+        this.orders[order].productsId.splice(idIndex, 1);
+
+        this.products = this.products.filter((prod) => prod.id !== idProd);
       } catch (err) {
         console.log(err.message);
       }

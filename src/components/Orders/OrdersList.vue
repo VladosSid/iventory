@@ -39,31 +39,23 @@
     <OrderListProdact v-if="useGeneralStore().isOpen" />
   </div>
 
-  <ModalWindow v-if="generalStore.showModal">
-    <template v-slot:body>
-      <ModalDeleteOrders
-        v-if="
-          !useGeneralStore().addModalOrder && !useGeneralStore().addModalProd
-        "
-      >
-        <template v-slot:title>
-          Ви уверены, что хотите удалить приход?
-        </template>
+  <!-- <transition name="fade">
+    <ModalWindow v-if="generalStore.showModal">
+      <template v-slot:body>
+        <ModalDeleteOrders
+          v-if="
+            !useGeneralStore().addModalOrder && !useGeneralStore().addModalProd
+          "
+        >
+          <template v-slot:title>
+            Ви уверены, что хотите удалить приход?
+          </template>
 
-        <template v-slot:button>Удалить</template>
-      </ModalDeleteOrders>
-
-      <ModalAddOrder v-if="useGeneralStore().addModalOrder">
-        <template v-slot:title> Добавить приход </template>
-        <template v-slot:button>Добавить</template>
-      </ModalAddOrder>
-
-      <AddProductModal v-if="useGeneralStore().addModalProd">
-        <template v-slot:title> Добавить продукт </template>
-        <template v-slot:button>Добавить</template>
-      </AddProductModal>
-    </template>
-  </ModalWindow>
+          <template v-slot:button>Удалить</template>
+        </ModalDeleteOrders>
+      </template>
+    </ModalWindow>
+  </transition> -->
 </template>
 
 <script setup>
@@ -83,6 +75,24 @@ const generalStore = useGeneralStore();
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active {
+  animation: fade-in 0.5s;
+}
+.fade-leave-active {
+  animation: fade-in 0.5s reverse;
+}
+@keyframes fade-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 2fr;

@@ -1,6 +1,12 @@
 <script setup>
+import { useGeneralStore } from "./store/generalStore";
 import NavigationMenu from "./components/NavigationMenu/NavigationMenu.vue";
 import TopMenu from "./components/TopMenu/TopMenu.vue";
+
+import ModalWindow from "./components/Modal/ModalWindow.vue";
+import ModalDeleteOrders from "./components/Modal/ModalDeleteOrders.vue";
+import ModalAddOrder from "./components/Modal/AddOrder.vue";
+import AddProductModal from "./components/Modal/AddProductModal.vue";
 </script>
 
 <template>
@@ -13,9 +19,50 @@ import TopMenu from "./components/TopMenu/TopMenu.vue";
       <router-view class="container-position__page-view"></router-view>
     </main>
   </div>
+
+  <transition name="modal">
+    <ModalWindow v-if="useGeneralStore().showModal">
+      <template v-slot:body>
+        <ModalDeleteOrders v-if="useGeneralStore().openModalDelete">
+          <template v-slot:title
+            >Ви уверены, что хотите удалить продукт?</template
+          >
+
+          <template v-slot:button>Удалить</template>
+        </ModalDeleteOrders>
+
+        <ModalAddOrder v-if="useGeneralStore().addModalOrder">
+          <template v-slot:title> Добавить приход </template>
+          <template v-slot:button>Добавить</template>
+        </ModalAddOrder>
+
+        <AddProductModal v-if="useGeneralStore().addModalProd">
+          <template v-slot:title> Добавить продукт </template>
+          <template v-slot:button>Добавить</template>
+        </AddProductModal>
+      </template>
+    </ModalWindow>
+  </transition>
 </template>
 
 <style lang="scss" scoped>
+.modal-enter-active {
+  animation: modal-in 0.5s;
+}
+.modal-leave-active {
+  animation: modal-in 0.5s reverse;
+}
+@keyframes modal-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .header {
   position: fixed;
 }

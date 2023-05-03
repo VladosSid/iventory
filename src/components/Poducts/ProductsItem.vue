@@ -9,7 +9,7 @@
     ></div>
 
     <img
-      src="../../assets/ImgProd.png"
+      src="../../assets/monitor.png"
       alt="Photo product"
       class="list-prod__photo"
     />
@@ -84,6 +84,8 @@
           useGeneralStore().idModalProducts = [
             { id, serialNumber, isNew, photo, title },
           ];
+          useGeneralStore().idDeleteProduct = id;
+          useGeneralStore().openModalDelete = true;
         }
       "
       class="list-prod__delete"

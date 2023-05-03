@@ -30,6 +30,7 @@ const close = () => {
     orderId: "",
     isNew: false,
   };
+  useGeneralStore().openModalDelete = false;
 };
 </script>
 
