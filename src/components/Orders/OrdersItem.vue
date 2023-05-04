@@ -84,6 +84,7 @@
           useGeneralStore().showModal = true;
           useGeneralStore().idModalProducts = prodList;
           useGeneralStore().idDeleteOrder = id;
+          useGeneralStore().openModalDelete = true;
         }
       "
       class="order-item__delete"
