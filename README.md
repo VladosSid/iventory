@@ -15,8 +15,8 @@
 - створення і видалення замовленнь та товарів;
   <img src="https://drive.google.com/file/d/1GWg2VSq2H7D3dmyiR5lkkgKYEZTeEcYa/view?usp=share_link">
 - пошук замовлення по назві;
-  <img src="https://imgur.com/6mT9T2e">
-- сортування товарів за типом та специфікаціє;
+  <img src="./public/Logo.ico">
+- сортування товарів за типом та специфікацією;
   <img src="https://imgur.com/923ROUL">
 
 ---
