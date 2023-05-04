@@ -13,11 +13,11 @@
 ## Додаток надає можливість:
 
 - створення і видалення замовленнь та товарів;
-  <img src="https://drive.google.com/file/d/1GWg2VSq2H7D3dmyiR5lkkgKYEZTeEcYa/view?usp=share_link">
+  <img src="./public/add.gif">
 - пошук замовлення по назві;
-  <img src="./public/Logo.ico">
+  <img src="./public/find.gif">
 - сортування товарів за типом та специфікацією;
-  <img src="https://imgur.com/923ROUL">
+  <img src="./public/filter.gif">
 
 ---
 
