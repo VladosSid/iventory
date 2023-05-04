@@ -5,14 +5,15 @@
 ---
 
 <img src="https://cdn3d.iconscout.com/3d/free/thumb/vuejs-4387636-3640297.png" alt="vue3" width="20" height="20"/> Це було моє перше знайомство з Vue. Це чудовий досвід.
-У програмі ще є місце для вдосконалення. Але головне завдання виконано і все працює))
+
+У додатку ще є що вдосконалювати, але головне завдання виконано і все працює.
 
 ---
 
 ## Додаток надає можливість:
 
 - створення і видалення замовленнь та товарів;
-  <img src="https://imgur.com/a/1hup8VO">
+  <img src="https://drive.google.com/file/d/1GWg2VSq2H7D3dmyiR5lkkgKYEZTeEcYa/view?usp=share_link">
 - пошук замовлення по назві;
   <img src="https://imgur.com/6mT9T2e">
 - сортування товарів за типом та специфікаціє;
