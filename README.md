@@ -4,29 +4,29 @@
 
 ---
 
-<img src="https://cdn3d.iconscout.com/3d/free/thumb/vuejs-4387636-3640297.png" alt="vue3" width="20" height="20"/> Це було моє перше знайомство з Vue. Це чудовий досвід.
+<img src="https://cdn3d.iconscout.com/3d/free/thumb/vuejs-4387636-3640297.png" alt="vue3" width="20" height="20"/> This was my first introduction to Vue. It's a great experience.
 
-У додатку ще є що вдосконалювати, але головне завдання виконано і все працює.
+The application still has a lot to improve, but the main task is done and everything works.
 
 ---
 
 ## Додаток надає можливість:
 
-- створення і видалення замовленнь та товарів;
+- creation and deletion of orders and goods;
   <img src="./public/add.gif">
-- пошук замовлення по назві;
+- order search by name;
   <img src="./public/find.gif">
-- сортування товарів за типом та специфікацією;
+- sorting of goods by type and specification;
   <img src="./public/filter.gif">
 
 ---
 
-Для демо версії було додані дефолтні данні.
+Default data has been added for the demo version.
 
 ---
 
-## Як запустит проєкт локально?
+## How to run the project locally?
 
-- клонуйте репозиторій;
-- в терміналі пропишіть команду npm install
-- коли завантаження завершиться виконайте команду npm run start
+- clone the repository;
+- write the npm install command in the terminal
+- when the download is complete, execute the npm run start command
