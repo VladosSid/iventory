@@ -10,7 +10,7 @@ The application still has a lot to improve, but the main task is done and everyt
 
 ---
 
-## Додаток надає можливість:
+## The application provides an opportunity:
 
 - creation and deletion of orders and goods;
   <img src="./public/add.gif">
