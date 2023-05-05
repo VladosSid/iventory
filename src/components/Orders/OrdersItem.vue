@@ -112,7 +112,6 @@
 
 <script setup>
 import { useGeneralStore } from "../../store/generalStore";
-// import { useOrdersStore } from "../../store/ordersStore";
 
 import currentDate from "../../helpers/currentDate";
 import refactorDate from "../../helpers/refactorDate";
@@ -120,8 +119,6 @@ import refactorDate from "../../helpers/refactorDate";
 import { listProdacts } from "../../helpers/orderListProdacts";
 
 const { day, month, year } = currentDate();
-
-// const generalStore = useGeneralStore();
 
 const props = defineProps({
   id: String,
