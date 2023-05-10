@@ -246,17 +246,12 @@ export const useGeneralStore = defineStore("general", {
     },
 
     getDeleteProduct(idProd) {
-      console.log("id Prod", idProd);
       try {
         const idOrder = this.products.find((prod) => prod.id === idProd);
-
-        console.log("id order", idOrder);
 
         const order = this.orders.findIndex(
           (order) => order.id === idOrder.orderId
         );
-
-        console.log("order", order);
 
         const idIndex = this.orders[order].productsId.findIndex(
           (id) => id === idProd

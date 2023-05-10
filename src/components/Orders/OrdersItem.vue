@@ -50,9 +50,12 @@
         </svg>
       </span>
 
-      <div class="order-item__quantity order-item__info--positions">
+      <div
+        @click="cunter"
+        class="order-item__quantity order-item__info--positions"
+      >
         <p>
-          {{ prodList.length }}
+          {{ lengthProd }}
         </p>
 
         <span style="color: #656564; font-size: 12px">Продукта</span>
@@ -111,6 +114,7 @@
 </template>
 
 <script setup>
+import { ref, watchEffect } from "vue";
 import { useGeneralStore } from "../../store/generalStore";
 
 import currentDate from "../../helpers/currentDate";
@@ -126,7 +130,14 @@ const props = defineProps({
   date: String,
 });
 
-const prodList = listProdacts(props.id);
+let prodList = [];
+let lengthProd = ref(0);
+
+watchEffect(() => {
+  prodList = listProdacts(props.id);
+
+  lengthProd.value = prodList.length;
+});
 
 const priceCount = {
   UAH: 0,
